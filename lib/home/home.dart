@@ -6,42 +6,42 @@ import 'package:pizza_db/models/pizza_model.dart';
 //create List expecting PizzaModel class called pizzas
 List<PizzaModel> pizzas = List<PizzaModel>();
 
+//used for dialog boxes
+BuildContext globalContext;
+
 //get data from google sheet, decode json, convert to PizzaModel class, add results to pizzas
 Future<List<PizzaModel>> getPizzaFromSheet() async {
-    //specify url to get data from
-    var url =
-        "https://script.google.com/macros/s/AKfycbyZixrzRjubvXFbtySZHEDK9KHjTH8AnAyy3HRsgYDY3UyliNQ/exec";
+  //specify url to get data from
+  var url =
+      "https://script.google.com/macros/s/AKfycbyZixrzRjubvXFbtySZHEDK9KHjTH8AnAyy3HRsgYDY3UyliNQ/exec";
 
-    //get the data  from URL
-    var raw = await http.get(url);
+  //get the data  from URL
+  var raw = await http.get(url);
 
-    //decode the raw data into JSON
-    var jsonPizza = convert.jsonDecode(raw.body);
-    print('first print$jsonPizza');
+  //decode the raw data into JSON
+  var jsonPizza = convert.jsonDecode(raw.body);
+  print('first print$jsonPizza');
 
-    //convert JSON key value pairs to flutter pizza model for each row
-    jsonPizza.forEach((element) {
-      PizzaModel pizzaModel = PizzaModel();
-      pizzaModel.id = element['id'];
-      pizzaModel.name = element['name'];
-      pizzaModel.rating = element['rating'];
-      pizzaModel.pricing = element['pricing'];
-      pizzaModel.brand = element['brand'];
-      pizzaModel.notes = element['notes'];
-      pizzaModel.timeToCook = element['time_to_cook'];
-      pizzaModel.reviewDate = element['review_date'];
-      pizzaModel.tags = element['tags'];
-      pizzaModel.picture = element['picture'];
+  //convert JSON key value pairs to flutter pizza model for each row
+  jsonPizza.forEach((element) {
+    PizzaModel pizzaModel = PizzaModel();
+    pizzaModel.id = element['id'];
+    pizzaModel.name = element['name'];
+    pizzaModel.rating = element['rating'];
+    pizzaModel.pricing = element['pricing'];
+    pizzaModel.brand = element['brand'];
+    pizzaModel.notes = element['notes'];
+    pizzaModel.timeToCook = element['time_to_cook'];
+    pizzaModel.reviewDate = element['review_date'];
+    pizzaModel.tags = element['tags'];
+    pizzaModel.picture = element['picture'];
 
-      //add each attribute into a list of PizzaModels called pizzas
-      pizzas.add(pizzaModel);
-    });
-    
-    return pizzas;
-  }
+    //add each attribute into a list of PizzaModels called pizzas
+    pizzas.add(pizzaModel);
+  });
 
-
-
+  return pizzas;
+}
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -49,7 +49,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   //create a new PizzaModel List, we will store the results for getting data function here
   Future<List<PizzaModel>> futurePizza;
 
@@ -83,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             } else {
+              globalContext = context;
               return PaginatedDataTable(
                 header: Text('HEADER'),
                 source: _pizzaDataSource,
@@ -90,69 +90,75 @@ class _HomeScreenState extends State<HomeScreen> {
                 sortColumnIndex: _sortColumnIndex,
                 columns: <DataColumn>[
                   DataColumn(
-                    label: Text('ID'),
-                    numeric: true,
-                    onSort: (int columnIndex, bool ascending) {
-                      _pizzaDataSource._sort((pizza) => pizza.id, ascending);
+                      label: Text('ID'),
+                      numeric: true,
+                      onSort: (int columnIndex, bool ascending) {
+                        _pizzaDataSource._sort((pizza) => pizza.id, ascending);
 
-                      setState(() {
-                        _sortColumnIndex = columnIndex;
-                        _sortAscending = ascending;
-                      });
-                    }),
+                        setState(() {
+                          _sortColumnIndex = columnIndex;
+                          _sortAscending = ascending;
+                        });
+                      }),
                   DataColumn(
-                    label: Text('Name'),
-                    onSort: (int columnIndex, bool ascending) {
-                      _pizzaDataSource._sort((pizza) => pizza.name, ascending);
+                      label: Text('Name'),
+                      onSort: (int columnIndex, bool ascending) {
+                        _pizzaDataSource._sort(
+                            (pizza) => pizza.name, ascending);
 
-                      setState(() {
-                        _sortColumnIndex = columnIndex;
-                        _sortAscending = ascending;
-                      });
-                    }),
+                        setState(() {
+                          _sortColumnIndex = columnIndex;
+                          _sortAscending = ascending;
+                        });
+                      }),
                   DataColumn(
-                    label: Text('Rating'),
-                    numeric: true,
-                    onSort: (int columnIndex, bool ascending) {
-                      _pizzaDataSource._sort((pizza) => pizza.rating, ascending);
+                      label: Text('Rating'),
+                      numeric: true,
+                      onSort: (int columnIndex, bool ascending) {
+                        _pizzaDataSource._sort(
+                            (pizza) => pizza.rating, ascending);
 
-                      setState(() {
-                        _sortColumnIndex = columnIndex;
-                        _sortAscending = ascending;
-                      });
-                    }),
+                        setState(() {
+                          _sortColumnIndex = columnIndex;
+                          _sortAscending = ascending;
+                        });
+                      }),
                   DataColumn(
-                    label: Text('Pricing'),
-                    numeric: true,
-                    onSort: (int columnIndex, bool ascending) {
-                      _pizzaDataSource._sort((pizza) => pizza.pricing, ascending);
+                      label: Text('Pricing'),
+                      numeric: true,
+                      onSort: (int columnIndex, bool ascending) {
+                        _pizzaDataSource._sort(
+                            (pizza) => pizza.pricing, ascending);
 
-                      setState(() {
-                        _sortColumnIndex = columnIndex;
-                        _sortAscending = ascending;
-                      });
-                    }),
+                        setState(() {
+                          _sortColumnIndex = columnIndex;
+                          _sortAscending = ascending;
+                        });
+                      }),
                   DataColumn(label: Text('Brand')),
                   DataColumn(
-                    label: Text('Time to Cook'),
-                    numeric: true,
-                    onSort: (int columnIndex, bool ascending) {
-                      _pizzaDataSource._sort((pizza) => pizza.timeToCook, ascending);
+                      label: Text('Time to Cook'),
+                      numeric: true,
+                      onSort: (int columnIndex, bool ascending) {
+                        _pizzaDataSource._sort(
+                            (pizza) => pizza.timeToCook, ascending);
 
-                      setState(() {
-                        _sortColumnIndex = columnIndex;
-                        _sortAscending = ascending;
-                      });
-                    }),
-                  DataColumn(label: Text('Review Date'),
-                  onSort: (int columnIndex, bool ascending) {
-                      _pizzaDataSource._sort((pizza) => pizza.reviewDate, ascending);
+                        setState(() {
+                          _sortColumnIndex = columnIndex;
+                          _sortAscending = ascending;
+                        });
+                      }),
+                  DataColumn(
+                      label: Text('Review Date'),
+                      onSort: (int columnIndex, bool ascending) {
+                        _pizzaDataSource._sort(
+                            (pizza) => pizza.reviewDate, ascending);
 
-                      setState(() {
-                        _sortColumnIndex = columnIndex;
-                        _sortAscending = ascending;
-                      });
-                    }),
+                        setState(() {
+                          _sortColumnIndex = columnIndex;
+                          _sortAscending = ascending;
+                        });
+                      }),
                   DataColumn(label: Text('Notes')),
                   DataColumn(label: Text('Tags')),
                   DataColumn(label: Text('Picture')),
@@ -166,7 +172,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 //details of pizza data source
 class PizzaDataSource extends DataTableSource {
-
   int selectedCount = 0;
 
   @override
@@ -189,7 +194,26 @@ class PizzaDataSource extends DataTableSource {
       DataCell(Text(pizza.brand)),
       DataCell(Text(pizza.timeToCook.toString())),
       DataCell(Text(pizza.reviewDate)),
-      DataCell(Text(pizza.notes)),
+      DataCell(IconButton(
+        icon: Icon(Icons.info_outline),
+        onPressed: () async {
+          await showDialog(
+              barrierDismissible: true,
+              context: globalContext,
+              builder: (BuildContext context) => new AlertDialog(
+                    title: Text('Notes'),
+                    content: Text(pizza.notes),
+                    contentPadding: EdgeInsets.fromLTRB(24.0, 20.0, 23.0, 20.0),
+                    actions: [
+                      FlatButton(
+                          child: Text('OK'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          })
+                    ],
+                  ));
+        },
+      )),
       DataCell(Text(pizza.tags)),
       DataCell(Text(pizza.picture)),
     ]);
@@ -211,6 +235,4 @@ class PizzaDataSource extends DataTableSource {
 
     notifyListeners();
   }
-
-
 }
