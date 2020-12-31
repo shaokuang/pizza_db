@@ -4,7 +4,6 @@ import 'dart:convert' as convert;
 import 'package:pizza_db/models/pizza_model.dart';
 
 //create List expecting PizzaModel class called pizzas
-//some comments
 List<PizzaModel> pizzas = List<PizzaModel>();
 
 //get data from google sheet, decode json, convert to PizzaModel class, add results to pizzas
