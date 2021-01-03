@@ -248,7 +248,16 @@ class PizzaDataSource extends DataTableSource {
               builder: (BuildContext context) => new AlertDialog(
                     title: Text('Picture(s)'),
                     content:
-                        Image.network(pizza.picture), //Text(pizza.picture),
+                        Image.network(
+                          pizza.picture,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) return child;
+
+                            return (LinearProgressIndicator());
+                          },
+                          errorBuilder: (context, error, stackTrace) => 
+                            Text('No pictures available'),
+                          ),
                     contentPadding: EdgeInsets.fromLTRB(24.0, 20.0, 23.0, 20.0),
                     actions: [
                       FlatButton(
@@ -263,6 +272,7 @@ class PizzaDataSource extends DataTableSource {
     ]);
   }
 
+  //custom sorting function to sort items in pizza
   void _sort(getField(pizza), bool ascending) {
     pizzas.sort((a, b) {
       if (!ascending) {
