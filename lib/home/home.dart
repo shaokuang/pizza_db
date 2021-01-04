@@ -68,6 +68,14 @@ class _HomeScreenState extends State<HomeScreen> {
   //used for rows per page config
   int _rowsPerPage = 10;
 
+  //tooltip texts
+  String tooltipRating = 'Out of 5';
+  String tooltipPricing = 'Out of 5';
+  String tooltipReviewDate = 'YYYY-MM-DD';
+  String tooltipNotes = 'Brief thoughts';
+  String tooltipTimeToCook = 'Minutes';
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,6 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     DataColumn(
                         label: Text('Rating'),
                         numeric: true,
+                        tooltip: tooltipRating,
                         onSort: (int columnIndex, bool ascending) {
                           _pizzaDataSource._sort(
                               (pizza) => pizza.rating, ascending);
@@ -139,6 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     DataColumn(
                         label: Text('Pricing'),
                         numeric: true,
+                        tooltip: tooltipPricing,
                         onSort: (int columnIndex, bool ascending) {
                           _pizzaDataSource._sort(
                               (pizza) => pizza.pricing, ascending);
@@ -162,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     DataColumn(
                         label: Text('Time to Cook'),
                         numeric: true,
+                        tooltip: tooltipTimeToCook,
                         onSort: (int columnIndex, bool ascending) {
                           _pizzaDataSource._sort(
                               (pizza) => pizza.timeToCook, ascending);
@@ -173,6 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         }),
                     DataColumn(
                         label: Text('Review Date'),
+                        tooltip: tooltipReviewDate,
                         onSort: (int columnIndex, bool ascending) {
                           _pizzaDataSource._sort(
                               (pizza) => pizza.reviewDate, ascending);
@@ -182,7 +194,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             _sortAscending = ascending;
                           });
                         }),
-                    DataColumn(label: Text('Notes')),
+                    DataColumn(
+                      label: Text('Notes'),
+                      tooltip: tooltipNotes),
                     DataColumn(label: Text('Tags')),
                     DataColumn(label: Text('Picture')),
                   ],
@@ -217,7 +231,7 @@ class PizzaDataSource extends DataTableSource {
       DataCell(Text(pizza.pricing.toString())),
       DataCell(Text(pizza.brand)),
       DataCell(Text(pizza.timeToCook.toString())),
-      DataCell(Text(pizza.reviewDate)),
+      DataCell(Text(pizza.reviewDate.substring(0, 10))),
       DataCell(IconButton(
         icon: Icon(Icons.info_outline),
         onPressed: () async {
