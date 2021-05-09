@@ -75,13 +75,6 @@
     <item name="text2" type="id"/>
     <item name="title" type="id"/>
     <integer name="status_bar_notification_info_maxnum">999</integer>
-    <string name="default_web_client_id" translatable="false">538659284400-mp2d8jorjnvvm6vi1pipf96ssvfg2agv.apps.googleusercontent.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">538659284400</string>
-    <string name="google_api_key" translatable="false">AIzaSyBDggbELkLuVsVD4Je9EDyD-uXsJDNLnLw</string>
-    <string name="google_app_id" translatable="false">1:538659284400:android:a7e0adc201ee76d8cbe275</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBDggbELkLuVsVD4Je9EDyD-uXsJDNLnLw</string>
-    <string name="google_storage_bucket" translatable="false">drawception-game.appspot.com</string>
-    <string name="project_id" translatable="false">drawception-game</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <!-- Show a splash screen on the activity. Automatically removed when

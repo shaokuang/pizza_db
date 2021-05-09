@@ -1,7 +1,4 @@
-#Sat May 08 20:53:05 PDT 2021
-base.0=D\:\\Flutter\\pizza_db\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
-path.1=classes.dex
-renamed.1=classes2.dex
+#Thu Dec 17 18:29:16 PST 2020
+base.0=D\:\\Flutter\\pizza_db\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=D\:\\Flutter\\pizza_db\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
