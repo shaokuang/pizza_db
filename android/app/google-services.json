@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "538659284400",
+    "project_id": "drawception-game",
+    "storage_bucket": "drawception-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538659284400:android:a7e0adc201ee76d8cbe275",
+        "android_client_info": {
+          "package_name": "com.drawception.game.db"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538659284400-mp2d8jorjnvvm6vi1pipf96ssvfg2agv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDggbELkLuVsVD4Je9EDyD-uXsJDNLnLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538659284400-mp2d8jorjnvvm6vi1pipf96ssvfg2agv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
